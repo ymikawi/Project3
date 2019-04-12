@@ -1,0 +1,116 @@
+ <!-- Hi TEAM!! -->
+ <!-- This is our draft HTML file -->
+
+  <!-- Added leaflet and bootstrap libraries -->
+  <!-- Added 5 elements = filter, map, graph1, graph2, table -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Foreclosure Fools</title>
+
+   <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+  <!-- Leaflet CSS & JS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+      integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+      integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+      crossorigin=""
+    ></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="./static/css/style.css" />
+
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 jumbotron text-center">
+        <h1>DMV Foreclosures Notices</h1>
+     
+        <h3 style="text-align: left;"><strong>DMV Foreclosure Notices delivers foreclosure notices to you as soon as they are made public in the newspapers.&nbsp; Get amazing deals well before they hit the MLS.</strong></h3>
+        <p style="text-align: left;">As you know, perfect timing &ndash; not just "location, location, location" &ndash; is critical when it comes to purchasing a new home and/or investment property at the right (lowest possible) price. That's because competition drives prices up. At DMV Foreclosure Notices, we target low-priced foreclosures in the DC, Maryland, and Virginia area &ndash; and pass that information (and huge savings) onto smart investors and homebuyers (that's you!).</p>
+        <h3 style="text-align: left;"><strong>It's so simple to find the best foreclosure real estate deals in the DMV area with DMVForeclosureSales.com: It's one easy search!</strong></h3>
+        <p style="text-align: left;">And that search can be performed at the state, county and city levels &ndash; so that your house hunt hits the ground running. Once you start digging into the incredible foreclosure deals, each listing will be complete with estimated equity, exact location, number of beds / baths, neighborhood details and so much more. Indeed, we provide some really great information we know you will be able to find amazing deals we offer a 10 day money back guarantee.</p>
+        <h3 style="text-align: left;"><strong>DMVForeclosureNotices.com updates its amazing database of foreclosure listings at least once EACH DAY!</strong></h3>
+        <p style="text-align: left;">Not weekly or monthly like other sites out there. This ensures that we offer prospective homebuyers and investors with the freshest, hottest deals on the Internet. In fact, most of our information comes direct off the press from online newspapers.&nbsp;</p>
+        <p>&nbsp;</p>
+       
+        <p>Use the filters to sort through the foreclosure data</p>
+
+
+
+
+
+      </div>
+    </div>
+     <!-- First Row with filter and map -->
+     <!-- Filter -->   
+    <div class="row">
+      <div class="col-md-9">
+        <div class="well">
+          <h5>SELECT Sample:</h5>
+          <select id="selDataset" onchange="optionChanged(this.value)"></select>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Sample MetaData</h3>
+          </div>
+          <div id="sample-metadata" class="panel-body"></div>
+        </div>
+      </div>
+
+    <!-- Map -->
+      <div class="col-md-9">
+        <div id="map"></div>
+      </div>
+  </div>
+
+  <!-- Second Row with graph(s) -->
+  <div class="row">
+    <div class="col-md-6">
+      <div id="graph1"></div>
+    </div>
+    <div class="col-md-6">
+      <div id="graph2"></div>
+    </div>
+  </div>
+
+    <!-- Third Row with table -->
+    <div class="row">
+      <div class="col-md-12">
+        <div id="table"></div>
+      </div>
+    </div>
+
+  <!-- <script src="https://cdn.plot.ly/plotly-1.31.2.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- d3 JS -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <!-- API key -->
+  <script src="{{ url_for('static', filename='js/config.js') }}"></script>
+  <!-- JS -->
+  <script src="{{ url_for('static', filename='js/logic.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
+  
+  <!-- <script type="text/javascript" src="../static/js/app.js"></script>
+    <script type="text/javascript" src="./static/js/config.js"></script>
+    <script type="text/javascript" src="./static/js/logic.js"></script> -->
+
+</body>
+
+</html>
