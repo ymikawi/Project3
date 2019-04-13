@@ -88,5 +88,49 @@ def table():
     return render_template('table.html', records=names, colnames=columnNames)
 
 
+@app.route("/graph.html")
+def graph():
+    """Return foreclosure list."""
+    
+    # # Use Pandas to perform the sql query
+    # stmt = db.session.query(Samples).statement
+    # df = pd.read_sql_query(stmt, db.session.bind)
+    # Return a list of the column names (sample names)
+    
+    #graph = pd.DataFrame(db).to_dict('records')
+    data_df = pd.read_sql("SELECT * FROM foreclosure_data_final", conn)
+    graph_data = data_df[["principal_amount","zestimate"]]
+    #print(graph)
+    #return graph.to_json(orient="records")
+    graph = pd.DataFrame(graph_data).to_dict('records')
+    data = {'graph': graph}
+    return render_template("graph.html", data=data)
+
+
+    
+
+
+
+@app.route("/graphdata")
+def graphdata():
+    """Return foreclosure list."""
+    
+    # # Use Pandas to perform the sql query
+    # stmt = db.session.query(Samples).statement
+    # df = pd.read_sql_query(stmt, db.session.bind)
+    # Return a list of the column names (sample names)
+    
+    #graph = pd.DataFrame(db).to_dict('records')
+    data_df = pd.read_sql("SELECT * FROM foreclosure_data_final", conn)
+    graph_data = data_df[["principal_amount","zestimate"]]
+
+    graph = pd.DataFrame(graph_data).to_dict('records')
+
+    print(graph)
+    # return graph.to_json(orient="records")
+    return jsonify(graph)
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)

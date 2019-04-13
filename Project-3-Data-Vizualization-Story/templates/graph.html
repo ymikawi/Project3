@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        font: 12px Arial;
+      }
+      path {
+        stroke-width: 2;
+        fill: none;
+      }
+      .axis path,
+      .axis line {
+        fill: none;
+        stroke: grey;
+        stroke-width: 1;
+        shape-rendering: crispEdges;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="graphDiv"></div>
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script>
+      var w = 1600,
+        h = 800,
+        pad = 20,
+        left_pad = 100,
+        data = d3.json('/graphdata');
+
+      var svg = d3
+        .select('#graphDiv')
+        .append('svg')
+        .attr('width', w)
+        .attr('height', h);
+
+      var x = d3.scale
+          .linear()
+          .domain([0, 2000000])
+          .range([left_pad, w - pad]),
+        y = d3.scale
+          .linear()
+          .domain([2000000, 0])
+          .range([pad, h - pad * 2]);
+
+      var xAxis = d3.svg
+          .axis()
+          .scale(x)
+          .orient('bottom'),
+        yAxis = d3.svg
+          .axis()
+          .scale(y)
+          .orient('left');
+
+      svg
+        .append('g')
+        .attr('class', 'axis')
+        .attr('transform', 'translate(0, ' + (h - pad) + ')')
+        .call(xAxis);
+        /*.append("text")
+        .attr("fill", "black")
+        .attr("transform", "translate(" + (w / 2) + " ," + (h - pad) + ")")
+        .style("text-anchor", "middle")
+        .text("Zestimate");*/
+
+      svg
+        .append('g')
+        .attr('class', 'axis')
+        .attr('transform', 'translate(' + (left_pad - pad) + ', 0)')
+        .call(yAxis);
+
+        function draw(data) {
+    
+    svg.selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("class", "circle")
+        .attr("cx", function (d) { return x(d[1]); })
+        .attr("cy", function (d) { return y(d[0]); })
+        .transition()
+        .duration(800)
+        .attr("r", 3.5);
+};
+    </script>
+  </body>
+</html>
