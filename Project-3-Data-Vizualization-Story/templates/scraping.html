@@ -1,0 +1,170 @@
+ <!-- Hi TEAM!! -->
+ <!-- This is our draft HTML file -->
+
+  <!-- Added leaflet and bootstrap libraries -->
+  <!-- Added 5 elements = filter, map, graph1, graph2, table -->
+
+  <!DOCTYPE html>
+  <html lang="en">
+  
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Foreclosure Fools</title>
+  
+     <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      
+    <!-- Leaflet CSS & JS -->
+      <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin=""
+      />
+      <script
+        src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+        crossorigin=""
+      ></script>
+  
+      <!-- CSS -->
+      <link rel="stylesheet" type="text/css" href="./static/css/style.css" />
+  
+  </head>
+  
+  <body>
+  
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 jumbotron text-center">
+
+                <p style="text-align: left;"><strong>Data Scraping:</strong></p>
+                <p style="text-align: left;">Scraping foreclosure infromation on the <a title="Classified Section of the Washington Times" href="https://www.classifieds.washingtontimes.com">Washington Times</a> was difficult because the infromation is <span style="color: #ff0000;">VERY</span> unstructured.&nbsp; The layouts for the foreclosure notices are dependent on the law firms and the Washington Times does not really have a solid structure in their code to handle similar data.&nbsp;</p>
+                <p style="text-align: left;">For instance, just by looking at snippets of the first 3 listings in Alexandria you can spot numerous differences:</p>
+                
+                <ul>
+<li><a title="First listing" href="http://classified.washingtontimes.com/category/354/Foreclosure-Sales-ALEX-Cty/listings/94014/00024934.html">First listing in Alexandria&nbsp;</a></li>
+<li><a title="2nd listing" href="http://classified.washingtontimes.com/category/354/Foreclosure-Sales-ALEX-Cty/listings/94029/00024652.html">Second listing in Alexandria</a></li>
+<li><a title="3rd listing" href="http://classified.washingtontimes.com/category/354/Foreclosure-Sales-ALEX-Cty/listings/94810/00025803.html">Third listing in Alexandria</a></li>
+</ul>
+                
+                <p style="text-align: left;"><img src="static/listing1.png" alt="first listing" width="130" height="26" /></p>
+                <p style="text-align: left;"><img src="static/listing2.png" alt="2nd listing" width="50" height="50" /></p>
+                <p style="text-align: left;"><img src="static/listing3.jpg" alt="3rd lising" width="50" height="50" /></p>
+                <p style="text-align: left;">The scraping approach used was:</p>
+                <ul style="text-align: left;">
+                <li>
+                <p>First, we tried to find HTML/CSS tags that we could utilize but they weren&rsquo;t consistent.</p>
+                </li>
+                <li>
+                <p>Real expression language was difficult but ultimately required</p>
+                <ul>
+                <li>
+                <p>Tools like <a title="RegExr - Real Expression Tool" href="http://www.regexr.com">RegExr</a> are useful once you figure out how to use them.&nbsp;</p>
+                </li>
+                </ul>
+                </li>
+                <li>
+                <p><strong>Listings:</strong>&nbsp; Beautiful soup was used for the web links (get_listing function)</p>
+                </li>
+                <li>
+                <p>Real expressions was used for:</p>
+                <ul>
+                <li>
+                <p><strong>Original mortgage price</strong>: by searching for dollar, and then getting to the end of the decimals.</p>
+                </li>
+                <li>
+                <p><strong>Property address</strong>: after &ldquo;trustee&rdquo;, grab everything up until 5 digit zip code.&nbsp;</p>
+                <ul>
+                <li>
+                <p>Remove &ldquo;sale&rdquo;, &ldquo;of&rdquo;, commas, tab and new line</p>
+                </li>
+                </ul>
+                </li>
+                <li>
+                <p>Get <strong>deposit</strong>: &ldquo;deposit of&rdquo; and then $</p>
+                </li>
+                </ul>
+                </li>
+                <li>
+                <p>Spacy for real expression recognition:&nbsp;&nbsp;Spacy can sometimes understand natural language.&nbsp; So for instance, there are lots of different ways to say a date or time, and rather than use real expression, for some items it was better to use them).</p>
+                <ul>
+                <li>
+                <p><strong>Dates</strong>:</p>
+                <ul>
+                <li>
+                <p>Assumption: Auction is always max</p>
+                </li>
+                <li>
+                <p>Assumption: Oldest is always principal amount</p>
+                <ul>
+                <li>
+                <p>(Some postings have original deed date)</p>
+                <ul>
+                <li>
+                <p>Excluded items before 1970</p>
+                </li>
+                </ul>
+                </li>
+                <li>
+                <p><strong>Time of auction</strong>:</p>
+                <ul>
+                <li>
+                <p>After &ldquo;date&rdquo;, get &ldquo;Time&rdquo;.</p>
+                </li>
+                </ul>
+                </li>
+                </ul>
+                </li>
+                </ul>
+                </li>
+                </ul>
+                </li>
+                </ul>
+                <ul style="text-align: left;">
+                <li>
+                <p><strong>Law firms and Auction locations</strong>: Limited in number, so we set up as a dictionary. Searched the text for specific elements of the law firms and locations (such as location or law firm name), then used the dictionary to return the key of the full firm and location.</p>
+                </li>
+                </ul>
+                <p style="text-align: left;">After setting up functions for each of the above, we needed to figure out a way to iterate through the pages of Washington Times because each location only has 10 listings to a page.&nbsp; We spent a lot of time and after a while we gave up and just hard coded the page listings.&nbsp;</p>
+                <p style="text-align: left;">Eventually we went back and were able to utilize splinter"</p>
+                <ul style="text-align: left;">
+                <li>
+                <p><strong>Splinter:</strong> Used to iterate through the city pages to get all of the foreclosures in a city if there were more than 10.&nbsp; Opens up a browser, takes all of the listings off the page, and if there is a next button.&nbsp; Keeps looking for the next button until it isn&rsquo;t there anymore.&nbsp;</p>
+                </li>
+                </ul>
+                <p style="text-align: left;">Finally, after we knew we were going to get all of our pages done, we created our nested loops to iterate through each page and pull the information out above.&nbsp;&nbsp;</p>
+                <p style="text-align: left;">After we had the data in, we used geocities to get <strong>longitude and latitude</strong>&nbsp;coordinates.<strong>&nbsp;</strong></p>
+                <p style="text-align: left;">Then we brought in more information about the properties using <strong>Zillow API</strong>, such as bedrooms, bathrooms, square footage, estimated value, and other important information.&nbsp;</p>
+                <p style="text-align: left;">We merged the two fields by adding the Mongo unique ID to the Zillow data.&nbsp; Then we exported the data into an SQLDB platform because it was easier for dealing with our Flask app (and we didn't want to go back and change the mongoDB that we already set up).&nbsp;</p>
+                <p style="text-align: left;">&nbsp;</p>
+                <p style="text-align: left;">&nbsp;</p>
+                <p>&nbsp;</p> 
+  
+  
+  
+  
+        </div>
+      </div>
+         
+    <!-- <script src="https://cdn.plot.ly/plotly-1.31.2.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+      <!-- d3 JS -->
+      <script src="https://d3js.org/d3.v4.min.js"></script>
+      <!-- API key -->
+    <script src="{{ url_for('static', filename='js/config.js') }}"></script>
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='js/logic.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
+    
+    <!-- <script type="text/javascript" src="../static/js/app.js"></script>
+      <script type="text/javascript" src="./static/js/config.js"></script>
+      <script type="text/javascript" src="./static/js/logic.js"></script> -->
+  
+  </body>
+  
+  </html>
+  

@@ -1,0 +1,107 @@
+
+  <!DOCTYPE html>
+  <html lang="en">
+  
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Foreclosure Fools</title>
+  
+     <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      
+    <!-- Leaflet CSS & JS -->
+      <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin=""
+      />
+      <script
+        src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+        crossorigin=""
+      ></script>
+  
+      <!-- CSS -->
+      <link rel="stylesheet" type="text/css" href="./static/css/style.css" />
+  
+  </head>
+  
+  <body>
+
+
+    
+  
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 jumbotron text-center">
+         
+                <h1 style="text-align: left;">The story.&nbsp; Why do you want foreclosure information?</h1>
+                <p style="text-align: left;">Foreclosures are unfortunate for the people that have to go thru them, but can be a great opportunity for those that can afford them.&nbsp;</p>
+                <p style="text-align: left;">Here are some key points if you want to buy foreclosures</p>
+                <p style="text-align: left;">1. <strong>Make sure you can get the cash</strong> because if you're the successful bidder, you'll have to pay the full amount within a few days.&nbsp;</p>
+                <p style="text-align: left;">2. <strong>Don't bank on one property</strong>. You need to be flexible because most times you will get out bid or the foreclosure will be cancelled.&nbsp;</p>
+                <p style="text-align: left;">3. <strong>Understand the risks</strong> and be comfortable with losing money. You can't see the inside, or predict when the previous owners will leave, so there are many unknowns.&nbsp;&nbsp;</p>
+                <p style="text-align: left;">4. <strong>Use good data</strong> from reputable scraping sites like DMV Foreclosure Notices:</p>
+                <p style="text-align: left;">&nbsp; A.&nbsp; Only buy properties that have a good amount of <span style="color: #ff0000;">equity</span>.&nbsp;</p>
+                <ul style="text-align: left;">
+                <li>Properties before 2000 and during the crisis (2007 to 2009) probably have good equity.&nbsp;</li>
+                </ul>
+                <p style="text-align: left;">&nbsp; B.&nbsp; Buy in <span style="color: #ff0000;">areas</span> that you know.&nbsp;</p>
+                <p style="text-align: left;">&nbsp; C.&nbsp; Get to the auction <span style="color: #ff0000;">on time</span>.&nbsp;</p>
+                <p style="text-align: left;">&nbsp;</p>
+                <p><strong>Examples Using the DMV Foreclosure Notice System:</strong></p>
+                <table style="width: 523px; float: left;">
+                <tbody>
+                <tr>
+                <td style="width: 129px;">Property</td>
+                <td style="width: 114px;">Purchase price</td>
+                <td style="width: 122px;">Day 2 Value</td>
+                <td style="width: 113px;">Current val</td>
+                <td style="width: 94px;">Equity</td>
+                </tr>
+                <tr>
+                <td style="width: 129px;"><a href="https://www.redfin.com/MD/Fort-Washington/7100-Brockway-Dr-20744/home/10798676">7100 Brockway</a></td>
+                <td style="width: 114px;">134,000</td>
+                <td style="width: 122px;">265,000</td>
+                <td style="width: 113px;">325,000</td>
+                <td style="width: 94px;">191,000</td>
+                </tr>
+                <tr>
+                <td style="width: 129px;"><a title="Southern Ave Property" href="https://www.zillow.com/homes/54467059_zpid/">3011 Southern</a></td>
+                <td style="width: 114px;">29,000</td>
+                <td style="width: 122px;">45,000</td>
+                <td style="width: 113px;">75,500</td>
+                <td style="width: 94px;">46,500</td>
+                </tr>
+                </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <h1>&nbsp;</h1>
+  
+              </div>
+      </div>
+      
+  
+    <!-- <script src="https://cdn.plot.ly/plotly-1.31.2.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+      <!-- d3 JS -->
+      <script src="https://d3js.org/d3.v4.min.js"></script>
+      <!-- API key -->
+    <script src="{{ url_for('static', filename='js/config.js') }}"></script>
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='js/logic.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
+    
+    <!-- <script type="text/javascript" src="../static/js/app.js"></script>
+      <script type="text/javascript" src="./static/js/config.js"></script>
+      <script type="text/javascript" src="./static/js/logic.js"></script> -->
+  
+  </body>
+  
+  </html>
+  
